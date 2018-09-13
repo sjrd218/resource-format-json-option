@@ -1,0 +1,37 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option enforcedvalues='true' name='tags' required='true' values='docker,linux,vagrant,windows' />
+        <option delimiter=',' enforcedvalues='true' multivalued='true' name='nodeName' required='true' valuesUrl='http://rundeck:4440/api/26/project/${job.project}/resources?authtoken=${globals.apitoken}&amp;format=option-json&amp;filter=tags:${option.tags.value}' />
+      </options>
+    </context>
+    <defaultTab>summary</defaultTab>
+    <description><![CDATA[Control node filter from input cascade options.
+A global variable called "globals.apitoken" is needed to pass the authentication to the API]]></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <loglevel>INFO</loglevel>
+    <name>Nodes_Cascading_Remote_Options</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>"${option.NodeName}"</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>ls -lrt</exec>
+      </command>
+      <command>
+        <exec>whoami</exec>
+      </command>
+    </sequence>
+  </job>
+</joblist>
