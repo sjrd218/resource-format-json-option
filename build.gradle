@@ -63,6 +63,14 @@ jar {
     from "$buildDir/output"
     manifest {
         def libList = configurations.pluginLibs.collect{'lib/' + it.name}.join(' ')
+        attributes 'Rundeck-Plugin-Name' : pluginName
+        attributes 'Rundeck-Plugin-Description' : 'This plugin serializes a set of Node resources into a JSON format that is compatible with Remote option values on a Job For example, this plugin can help to control the node filter of a Job through input options (for example using Cascade remote options).'
+        attributes 'Rundeck-Plugin-Rundeck-Compatibility-Version': '3.0.5+'
+        attributes 'Rundeck-Plugin-Tags': 'java,resource format generator,json'
+        attributes 'Rundeck-Plugin-License': 'Apache 2.0'
+        attributes 'Rundeck-Plugin-Source-Link': 'https://github.com/rundeck-plugins/resource-format-json-option'
+        attributes 'Rundeck-Plugin-Target-Host-Compatibility': 'all'
+        attributes 'Rundeck-Plugin-Author': 'Rundeck, Inc.'
         attributes 'Rundeck-Plugin-Classnames': pluginClassNames
         attributes 'Rundeck-Plugin-File-Version': project.version
         attributes 'Rundeck-Plugin-Version': rundeckPluginVersion
